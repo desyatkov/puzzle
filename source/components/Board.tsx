@@ -1,13 +1,13 @@
-// @ts-nocheck
 import useGameState from "../controller/game";
-import {box} from "blessed";
 import Cell from "./Cell";
 import React from "react";
 
 const Board = () => {
+	// @ts-ignore
 	const [board, moves, solved, solvedArr, newGame, move, moveKey ] = useGameState();
 
 	return (
+		// @ts-ignore
 		<box
 			width={42}
 			height={25}
@@ -18,7 +18,7 @@ const Board = () => {
 			draggable={false}
 		>
 			{
-				board.slice(0,-1).map((pos, index) => (
+				board.slice(0,-1).map((pos:string, index:number) => (
 					<Cell
 						solvedArr={solvedArr}
 						key={index}
@@ -29,10 +29,12 @@ const Board = () => {
 				))
 			}
 			<StartBtn newGame={newGame}/>
+		{/* @ts-ignore */}
 		</box>
 	)
 }
 
+// @ts-ignore
 const StartBtn = ({newGame}) => {
 	return (
 		<button
@@ -41,6 +43,7 @@ const StartBtn = ({newGame}) => {
 			height={3}
 			style={{
 				textAlign: 'center',
+				// @ts-ignore
 				border: {fg: 'green'},
 				fg: 'white',
 				ta: 'center',
@@ -49,8 +52,9 @@ const StartBtn = ({newGame}) => {
 				}
 			}}
 			mouse
-			onPress={a => newGame()}
+			onPress={() => newGame()}
 		>
+			{/* @ts-ignore*/}
 			<text top="center" left="center">
 				Start New Game
 			</text>

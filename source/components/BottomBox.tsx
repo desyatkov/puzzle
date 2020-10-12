@@ -1,9 +1,8 @@
-// @ts-nocheck
 import React, { FC } from 'react';
-import {box} from "blessed";
 
-const BottomBox = () => {
+const BottomBox:FC = () => {
 	return (
+		// @ts-ignore
 		<box
 			height={3}
 			top={0}
@@ -12,6 +11,7 @@ const BottomBox = () => {
 			draggable={false}
 		>
 			To play, just click with the mouse cursor on the selected cell. For end game Q or ESC.
+		{/*@ts-ignore*/}
 		</box>
 	)
 }

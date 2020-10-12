@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// @ts-nocheck
 const react_1 = require("react");
 const rand_1 = require("../utils/rand");
 const NUM_ROWS = 4;
@@ -14,14 +13,15 @@ class GameState {
         this.startNewGame();
     }
     static getNewBoard() {
-        return Array(NUM_TILES).fill(0).map((x, index) => [
+        return Array(NUM_TILES).fill(0).map((_, index) => [
             Math.floor(index / NUM_ROWS),
             index % NUM_COLS
         ]);
     }
     static getInstance() {
-        if (!GameState.instance)
+        if (!GameState.instance) { // @ts-ignore
             GameState.instance = new GameState();
+        }
         return GameState.instance;
     }
     isSolved() {
@@ -40,7 +40,7 @@ class GameState {
     }
     shuffle() {
         this.shuffling = true;
-        let shuffleMoves = rand_1.rand(...SHUFFLE_MOVES_RANGE);
+        let shuffleMoves = rand_1.rand(SHUFFLE_MOVES_RANGE[0], SHUFFLE_MOVES_RANGE[1]);
         while (shuffleMoves-- > 0) {
             this.moveInDirection(MOVE_DIRECTIONS[rand_1.rand(0, 3)]);
         }
@@ -68,11 +68,13 @@ class GameState {
         const boardAfterMove = [...this.board];
         boardAfterMove[EMPTY_INDEX] = tilePosition;
         boardAfterMove[index] = emptyPosition;
-        if (!this.shuffling)
+        if (!this.shuffling) { // @ts-ignore
             this.stack.push(this.board);
+        }
         this.board = boardAfterMove;
-        if (!this.shuffling)
+        if (!this.shuffling) { // @ts-ignore
             this.moves += 1;
+        }
         return true;
     }
     moveInDirection(dir) {
@@ -105,17 +107,24 @@ GameState.solvedBoard = GameState.getNewBoard();
 GameState.instance = null;
 function useGameState() {
     const gameState = GameState.getInstance();
+    // @ts-ignore
     const [state, setState] = react_1.useState(gameState.getState());
     function newGame() {
+        // @ts-ignore
         gameState.startNewGame();
+        // @ts-ignore
         setState(gameState.getState());
     }
     function move(index) {
+        // @ts-ignore
         gameState.moveTile(index);
+        // @ts-ignore
         setState(gameState.getState());
     }
     function moveKey(name) {
+        // @ts-ignore
         gameState.moveInDirection(name);
+        // @ts-ignore
         setState(gameState.getState());
     }
     return [state.board, state.moves, state.solved, state.solvedArr, newGame, move, moveKey];

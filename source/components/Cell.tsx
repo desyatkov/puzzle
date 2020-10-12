@@ -1,9 +1,8 @@
-// @ts-nocheck
 import React, {FC} from "react";
-import { box, button } from 'blessed';
-import { isEqual } from 'lodash';
+import { isEqual } from "lodash";
 
-const Cell: FC<{pos, index, move, solvedArr}> = ({pos, index, move, solvedArr}) => {
+const Cell: FC<{pos:any, index:number, move: Function, solvedArr:[]}> = ({pos, index, move, solvedArr}) => {
+
 	return <button
 		border={{type: 'line'}}
 		width={10}
@@ -11,6 +10,7 @@ const Cell: FC<{pos, index, move, solvedArr}> = ({pos, index, move, solvedArr}) 
 		left={pos[1]*10}
 		height={5}
 		style={{
+			// @ts-ignore
 			border: {fg: 'green'},
 			fg: 'white',
 			bg: isEqual(solvedArr[index], pos) ? 'blue' : 'magenta',
@@ -20,8 +20,9 @@ const Cell: FC<{pos, index, move, solvedArr}> = ({pos, index, move, solvedArr}) 
 		}}
 		draggable={false}
 		mouse
-		onPress={a=>move(index)}
+		onPress={()=>move(index)}
 	>
+		{/* @ts-ignore*/}
 		<text top="center" left="center">
 			{index+1}
 		</text>

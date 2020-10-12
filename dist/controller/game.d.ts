@@ -1,2 +1,2 @@
-declare function useGameState(): [];
+declare function useGameState(): any[];
 export default useGameState;

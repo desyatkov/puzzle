@@ -1,4 +1,8 @@
-# cli-puzzle
+# cli-puzzle run locally
+```bash
+$ npm install
+$ npm start
+```
 
 
 ## Install

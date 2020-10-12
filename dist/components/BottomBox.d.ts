@@ -1,3 +1,3 @@
-/// <reference types="react" />
-declare const BottomBox: () => JSX.Element;
+import { FC } from 'react';
+declare const BottomBox: FC;
 export default BottomBox;
